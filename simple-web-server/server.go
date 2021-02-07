@@ -1,12 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
+	_ "net/http/pprof"
 	"time"
-	"log"
-	"encoding/json"
 )
 
 var summaries = [10]string{"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"}
@@ -41,8 +42,8 @@ func handlerHelloWorld(w http.ResponseWriter, r *http.Request) {
 func handlerWeatherForecast(w http.ResponseWriter, r *http.Request) {
 	weather := WeatherForecast{}
 	weather.weatherDiscovery()
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(weather)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(weather)
 }
 
 func main() {
